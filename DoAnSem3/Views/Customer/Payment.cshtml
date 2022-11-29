@@ -1,0 +1,101 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = "Payment";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+      
+<section class="page-header page-header-text-light bg-secondary">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1>Payment</h1>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <ul class="breadcrumb justify-content-start justify-content-md-end mb-0">
+                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="active">Payment</li>
+            </ul>
+        </div>
+    </div>
+</section><!-- Page Header end -->
+<!-- Content
+============================================= -->
+<div id="content">
+    <div class="container">
+        <div class="bg-light shadow-md rounded">
+            <div class="row align-items-center p-4">
+                <div class="col-md-6">
+                    <h2 class="text-primary d-flex align-items-center m-0"><span class="text-3 text-dark mr-1">Total Payable Amount: </span>$ @ViewBag.Payment.Price</h2>
+                </div>
+                <div class="col-md-6">
+                    <p class="text-md-right pb-0 mb-0">Transaction ID: @ViewBag.Num<span class="text-body"></span></p>
+                </div>
+            </div>
+
+            <hr class="m-0">
+            <div class="p-4">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <form id="dthRechargeBill" asp-controller="Customer" asp-action="Orders" method="post">
+                            <input type="hidden" name="transactionId" value="@ViewBag.Num" />
+                            <input type="text" name="cusId" value="@HttpContextAccessor.HttpContext.Session.GetInt32("LoginCustomerId")" />
+                            <div class="bg-light shadow-md rounded p-4">
+                                <h2 class="text-6">Bill Information</h2>
+                                <div class="featured-box style-1">
+                                    <h3>Name service</h3>
+                                    <input type="hidden"  name="name" value="@ViewBag.Payment.Name" />
+                                    <p class=" ml-3 " >
+                                        @ViewBag.Payment.Name
+                                    </p> 
+                                    <p class=" ml-3 " >
+                                        @ViewBag.Payment.nspName
+                                    </p>
+                                    <p class=" ml-3 " >
+                                        @ViewBag.Payment.svName
+                                    </p>
+                                </div>
+                                <div class="featured-box style-1">
+                                    <h3>Telephone</h3>
+                                    <input type="hidden"  name="Phone" value="@ViewBag.PhoneNumber" />
+                                    <p class=" ml-3">@ViewBag.PhoneNumber</p>
+                                </div>
+                                <div class="featured-box style-1">
+                                    <h3>Description</h3>
+                                    <input type="hidden"  name="description" value="@ViewBag.Payment.Description" />
+
+                                    <p class=" ml-3">@ViewBag.Payment.Description</p>
+                                </div>
+                                <div class="featured-box style-1" >
+                                    <input type="hidden"  name="price" value="@ViewBag.Payment.Price" />
+
+                                    <h3>Price : <span class=" ml-3" name="price">$ @ViewBag.Payment.Price</span></h3>
+                                </div>
+                                <button class="btn btn-primary btn-block mt-3" type="submit">Continue to Recharge</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-4 mt-lg-0 mt-4">
+                        <p>We Accept:</p>
+                        <ul class="payments-types mb-3">
+                            <li><a href="#" target="_blank"> <img data-toggle="tooltip" src="/Customer/images/payment/visa.png" alt="visa" title="Visa"></a></li>
+                            <li><a href="#" target="_blank"> <img data-toggle="tooltip" src="/Customer/images/payment/discover.png" alt="discover" title="Discover"></a></li>
+                            <li><a href="#" target="_blank"> <img data-toggle="tooltip" src="/Customer/images/payment/american.png" alt="american express" title="American Express"></a></li>
+                            <li><a href="#" target="_blank"> <img data-toggle="tooltip" src="/Customer/images/payment/mastercard.png" alt="discover" title="Discover"></a></li>
+                        </ul>
+                        <div class="card bg-light-3 p-3">
+                            <p class="mb-2">We value your Privacy.</p>
+                            <p class="text-1 mb-0">We will not sell or distribute your contact information. Read our <a href="#">Privacy Policy</a>.</p>
+                            <hr>
+                            <p class="mb-2">Billing Enquiries</p>
+                            <p class="text-1 mb-0">Do not hesitate to reach our <a href="#">support team</a> if you have any queries.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- Content end -->
