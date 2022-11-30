@@ -87,10 +87,7 @@ namespace DoAnSem3.Controllers
             return View();
         }
         //đăng kí dịch vụ không làm phiền
-        public IActionResult Recharge_bill_donotdisturb()
-        {
-            return View();
-        }
+
 
 
         public IActionResult Recharge_plans(float price, int nspId)
