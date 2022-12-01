@@ -33,7 +33,7 @@ namespace DoAnSem3.Migrations
                     customerName = table.Column<string>(maxLength: 200, nullable: false),
                     email = table.Column<string>(nullable: false),
                     phone = table.Column<string>(nullable: false),
-                    phoneNsp = table.Column<string>(nullable: true),
+                    phoneNsp = table.Column<int>(nullable: false),
                     password = table.Column<string>(nullable: true),
                     totalPrice = table.Column<float>(nullable: true),
                     status = table.Column<bool>(nullable: false),
@@ -151,11 +151,11 @@ namespace DoAnSem3.Migrations
                     numberPhone = table.Column<string>(nullable: true),
                     nameCustomer = table.Column<string>(nullable: true),
                     nameService = table.Column<string>(nullable: true),
-                    description = table.Column<string>(nullable: true),
+                    transactionId = table.Column<int>(nullable: false),
                     createAt = table.Column<DateTime>(nullable: false),
                     status = table.Column<bool>(nullable: false),
                     productId = table.Column<int>(nullable: false),
-                    customerId = table.Column<int>(nullable: true)
+                    customerId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -165,7 +165,7 @@ namespace DoAnSem3.Migrations
                         column: x => x.customerId,
                         principalTable: "Customer",
                         principalColumn: "customerId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_orders_Product_productId",
                         column: x => x.productId,

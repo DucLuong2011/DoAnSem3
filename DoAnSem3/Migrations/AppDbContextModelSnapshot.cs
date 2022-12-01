@@ -85,7 +85,7 @@ namespace DoAnSem3.Migrations
                     b.Property<string>("phone")
                         .IsRequired();
 
-                    b.Property<string>("phoneNsp");
+                    b.Property<int>("phoneNsp");
 
                     b.Property<int>("role");
 
@@ -149,9 +149,7 @@ namespace DoAnSem3.Migrations
 
                     b.Property<DateTime>("createAt");
 
-                    b.Property<int?>("customerId");
-
-                    b.Property<string>("description");
+                    b.Property<int>("customerId");
 
                     b.Property<string>("nameCustomer");
 
@@ -162,6 +160,8 @@ namespace DoAnSem3.Migrations
                     b.Property<int>("productId");
 
                     b.Property<bool>("status");
+
+                    b.Property<int>("transactionId");
 
                     b.HasKey("orderId");
 
@@ -229,9 +229,10 @@ namespace DoAnSem3.Migrations
 
             modelBuilder.Entity("DoAnSem3.Models.Order", b =>
                 {
-                    b.HasOne("DoAnSem3.Models.Customer")
+                    b.HasOne("DoAnSem3.Models.Customer", "Customer")
                         .WithMany("Orders")
-                        .HasForeignKey("customerId");
+                        .HasForeignKey("customerId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("DoAnSem3.Models.Product", "Product")
                         .WithMany()

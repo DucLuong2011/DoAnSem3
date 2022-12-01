@@ -62,59 +62,28 @@ namespace DoAnSem3.Controllers
             return View();
         }
         //nạp thẻ điện thạoi
-        public IActionResult Recharge_bill_datacard(float price, int nspId)
+        public IActionResult Recharge_bill_datacard(string phone)
         {
-            //var values = _context.values.ToList();
-            //var networks = _context.networkServiceProviders.ToList();
-            //if (price != 0 && nspId != 0)
+            var cus = _context.customers.FirstOrDefault();
+            var values = _context.products.Where(c => c.svId.Equals(4)).ToList();
+            if (!string.IsNullOrEmpty(phone))
+            {
+                cus = _context.customers.Where(c => c.phone.Equals(phone)).FirstOrDefault();
+                values = _context.products.Where(c => c.svId.Equals(4))
+                                          .Where(c => c.nspId.Equals(cus.phoneNsp)).ToList();
+            }
+
+            //if (price != 0)
             //{
-            //    values = _context.values.Where(v => v.price.Equals(price)).Where(v => v.nspId.Equals(nspId))
-            //                            .OrderBy(v => v.valueId).ToList();
-            //}
-            //else if (nspId != 0)
-            //{
-            //    values = _context.values.Where(v => v.nspId.Equals(nspId))
-            //                            .OrderBy(v => v.valueId).ToList();
-            //}
-            //else if (price != 0)
-            //{
-            //    values = _context.values.Where(v => v.price.Equals(price))
-            //                           .OrderBy(v => v.valueId).ToList();
+            //    values = _context.products.Where(v => v.price.Equals(price)).Where(c => c.svId.Equals(4))
+            //                            .OrderBy(v => v.productId).ToList();
             //}
 
-            //ViewBag.Values = values;
-            //ViewBag.Networks = networks;
+            ViewBag.Customer = cus;
+            ViewBag.Values = values;
             return View();
         }
-        //đăng kí dịch vụ không làm phiền
 
 
-
-        public IActionResult Recharge_plans(float price, int nspId)
-        {
-
-            //var values = _context.values.ToList();
-            //var services = _context.services.ToList();
-            //var networks = _context.networkServiceProviders.ToList();
-            //if (price != 0 && nspId != 0)
-            //{
-            //    values = _context.values.Where(v => v.price.Equals(price)).Where(v => v.nspId.Equals(nspId))
-            //                            .OrderBy(v => v.valueId).ToList();
-            //}
-            //else if (nspId != 0)
-            //{
-            //    values = _context.values.Where(v => v.nspId.Equals(nspId))
-            //                            .OrderBy(v => v.valueId).ToList();
-            //}
-            //else if (price != 0)
-            //{
-            //    values = _context.values.Where(v => v.price.Equals(price))
-            //                           .OrderBy(v => v.valueId).ToList();
-            //}
-
-            //ViewBag.Values = values;
-            //ViewBag.Networks = networks;
-            return View();
-        }
     }
 }

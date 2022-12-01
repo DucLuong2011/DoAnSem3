@@ -38,79 +38,52 @@
                 {
                     <div class="col-lg-4 mb-4 mb-lg-0">
                         <h2 class="text-4 mb-3">DTH Recharge</h2>
-                        <form id="dthRechargeBill" asp-controller="Customer" asp-action="Payment" method="post">
-                            <input type="hidden" name="check" value="1" />
+                        <form id="dthRechargeBill" asp-controller="Service" asp-action="Recharge_bill_datacard" method="post">
+                            <input type="hidden" name="cusId" value="@HttpContextAccessor.HttpContext.Session.GetInt32("LoginCustomerId")" />
                             <div class="form-group">
-                                <select class="custom-select" name="id" id="operator">
-                                    <option value="">Select Your Operator</option>
-                                    @foreach (var item in ViewBag.Networks)
-                                    {
-                                        <option value="@item.nspId">@item.nspName</option>
-                                    }
-                                </select>
+                                <input type="text" class="form-control" name="phone" data-bv-field="number" id="cardNumber" placeholder="Enter Your Card Number">
                             </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="PhoneNumber" data-bv-field="number" id="cardNumber" placeholder="Enter Your Card Number">
-                            </div>
-                            <div class="form-group input-group">
-                                <div class="input-group-prepend"><span class="input-group-text">$</span> </div>
-                                <input class="form-control" id="amount" name="Price" placeholder="Enter Amount" type="text">
-                            </div>
-                            <button class="btn btn-primary btn-block" type="submit">Continue to Recharge</button>
+
+                            <button class="btn btn-primary btn-block" type="submit">Submit</button>
 
                         </form>
-                    </div><!-- DTH Recharge end -->
+                    </div>
+
+                    <!-- DTH Recharge end -->
                     <!-- Slideshow
                     ============================================= -->
                     <div class="col-lg-8">
                         <div class="bg-light shadow-md rounded p-4">
-                            <form id="view-plans" asp-controller="Service" asp-action="Recharge_bill_datacard" class="form-row mb-4 mb-sm-2" method="post">
-                                <div class="col-12 col-sm-6 col-md-3">
-                                    <div class="form-group">
-                                        <select class="custom-select" id="operator" name="nspId">
-                                            <option value="">Select Your Operator</option>
-                                            @foreach (var item in ViewBag.Networks)
-                                            {
-                                                <option value="@item.nspId">@item.nspName</option>
-                                            }
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-6 col-md-3">
-                                    <div class="form-group">
-                                        <select class="custom-select" name="price">
-                                            <option value="">Select Your Price</option>
-                                            <option value="20000">20000</option>
-                                            <option value="50000">50000</option>
-                                            <option value="100000">100000</option>
-                                            <option value="200000">200000</option>
-                                            <option value="500000">500000</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-6 col-md-3">
-                                    <button class="btn btn-primary btn-block" type="submit" value="submit">View Plans</button>
-                                </div>
-                            </form>
+
                             <div class="plans page" style="max-height:450px">
                                 <div class="table-responsive-md">
-                                    <table class="table table-hover border">
-                                        <tbody>
-                                            @foreach (var item in ViewBag.Values)
-                                            {
-                                                <tr>
-                                                    <td class="text-5 text-primary text-center align-middle">@item.valueName<span class="text-1 text-muted d-block"></span></td>
-                                                    <td class="text-3 text-center align-middle"> $@item.price<span class="text-1 text-muted d-block"> Amount</span></td>
-                                                    <td class="text-1 text-muted align-middle">@item.description</td>
-                                                    <td class="align-middle"><button class="btn btn-sm btn-outline-primary shadow-none" type="submit">Recharge Now</button></td>
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </table>
+                                    <form id="dthRechargeBill" asp-controller="Customer" asp-action="Payment" method="post">
+                                        <input type="hidden" name="check" value="1" />
+                                        <input type="hidden" name="phoneNumber" value="@ViewBag.Customer.phone" />
+                                        <input type="hidden" name="cusId" value="@HttpContextAccessor.HttpContext.Session.GetInt32("LoginCustomerId")" />
+                                        <table class="table table-hover border">
+                                            <tbody>
+                                                @foreach (var item in ViewBag.Values)
+                                                {
+                                                    <tr>
+                                                        <input type="hidden" name="id" value="@item.productId" />
+                                                        <td class="text-3 text-center align-middle"> @item.productId</td>
+                                                        <td class="text-5 text-primary text-center align-middle">@item.productName<span class="text-1 text-muted d-block"></span></td>
+                                                        <td class="text-3 text-center align-middle"> $ @item.price<span class="text-1 text-muted d-block"> Amount</span></td>
+                                                        <td class="text-1 text-muted align-middle">@item.description</td>
+                                                        <td class="align-middle"><button class="btn btn-sm btn-outline-primary shadow-none" type="submit" value="submit">Recharge Now</button></td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </form>
+
                                 </div>
                             </div>
                         </div>
-                    </div><!-- Slideshow end -->
+                    </div>
+
+                    <!-- Slideshow end -->
                 }
                 else
                 {
@@ -123,7 +96,9 @@
                             <div><a asp-controller="Home" asp-action="Regester">Đăng kí</a></div>
 
                         </form>
-                    </div><!-- DTH Recharge end -->
+                    </div>
+
+                    <!-- DTH Recharge end -->
                 }
 
             </div>
