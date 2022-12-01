@@ -41,7 +41,7 @@
                         <form id="dthRechargeBill" asp-controller="Service" asp-action="Recharge_bill_datacard" method="post">
                             <input type="hidden" name="cusId" value="@HttpContextAccessor.HttpContext.Session.GetInt32("LoginCustomerId")" />
                             <div class="form-group">
-                                <input type="text" class="form-control" name="phone" data-bv-field="number" id="cardNumber" placeholder="Enter Your Card Number">
+                                <input type="text" class="form-control" name="phone" value="@ViewBag.Phone" data-bv-field="number" id="cardNumber" placeholder="Enter Your Card Number">
                             </div>
 
                             <button class="btn btn-primary btn-block" type="submit">Submit</button>

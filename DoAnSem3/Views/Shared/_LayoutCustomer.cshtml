@@ -71,7 +71,7 @@
                                             <a class="dropdown-item " asp-controller="Service"  asp-action="Recharge_bill_online_recharge">Online Recharge</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item " asp-controller="Service" asp-action="Recharge_bill_datacard" >Data Card</a>
+                                            <a class="dropdown-item " asp-controller="Service" asp-action="Recharge_bill_datacard">Data Card</a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item " asp-controller="Service" asp-action="Recharge_bill_calltunes">Caller tunes</a>
@@ -95,7 +95,7 @@
                                         <ul class="dropdown-menu">
                                             <li><a class="dropdown-item" asp-controller="Home" asp-action="MyProfile">My Profile</a></li>
                                          
-                                            <li><a class="dropdown-item" asp-controller="Home" asp-action="OrdersHistory">Orders History</a></li>
+                                            <li><a class="dropdown-item" asp-controller="Customer" asp-action="Orders" asp-route-cusId="@HttpContextAccessor.HttpContext.Session.GetInt32("LoginCustomerId")">Orders History</a></li>
                                             <li><a class="dropdown-item" asp-controller="Home" asp-action="Logout">Logout</a></li>
 
                                         </ul>

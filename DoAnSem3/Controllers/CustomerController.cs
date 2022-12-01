@@ -16,7 +16,15 @@ namespace DoAnSem3.Controllers
             _context = context;
         }
 
-        public IActionResult Orders(Payment payment , int cusId)
+        public IActionResult Orders(int cusId)
+        {
+            var order = _context.orders.Include(o => o.Product).Where(o => o.customerId.Equals(cusId)).ToList();
+            ViewBag.Order = order;
+            return View();
+        }
+
+
+        public IActionResult Update_Orders(Payment payment, int cusId, int price)
         {
             Order order = new Order()
             {
@@ -29,9 +37,14 @@ namespace DoAnSem3.Controllers
                 status = true
             };
             _context.Add(order);
+
+            var cus = _context.customers.Find(cusId);
+            cus.totalPrice = cus.totalPrice - price;
+            _context.Update(cus);
             _context.SaveChanges();
-            ViewBag.Order = order;
-            return View();
+
+            return RedirectToAction("Index", "Home");
+            
         }
              
 
@@ -40,7 +53,7 @@ namespace DoAnSem3.Controllers
             Payment payment = new Payment();
             Random r = new Random();
             int num = r.Next();
-            var cus = _context.customers.Find(cusId);
+            var cus = _context.customers.Where(c => c.phone.Contains(phoneNumber)).FirstOrDefault();
 
             if (check == 0)
             {
