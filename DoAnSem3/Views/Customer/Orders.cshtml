@@ -38,26 +38,30 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>Date</th>
-                                    <th>Description</th>
-                                    <th>Name</th>
-                                    <th>Phone</th>
-                                    <th>Order ID</th>
+                                    <th>Number Phone</th>
+                                    <th>Name Customer</th>
+                                    <th>Name Service</th>
+                                    <th>Transaction ID</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-right">Amount</th>
                                     <th class="text-center"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="align-middle">@ViewBag.Order.createAt</td>
-                                    <td>sada</td>
-                                    <td class="align-middle">@ViewBag.Order.name</td>
-                                    <td class="align-middle">@ViewBag.Order.numberPhone</td>
-                                    <td class="align-middle">@ViewBag.Order.orderId</td>
-                                    <td class="align-middle text-center"><i class="fas fa-check-circle text-4 text-success" data-toggle="tooltip" data-original-title="Your order is Successful"></i></td>
-                                    <td class="align-middle text-right">@ViewBag.Order.price$</td>
-                                    <td class="align-middle text-center"><a href="#" data-toggle="tooltip" data-original-title="Repeat Order"><i class="fas fa-redo-alt"></i></a></td>
-                                </tr>
+                                @foreach (var item in @ViewBag.Order)
+                               {
+                                   <tr>
+                                        <td class="align-middle">@item.createAt</td>
+                                        <td class="align-middle">@item.numberPhone</td>
+                                        <td class="align-middle">@item.nameCustomer</td>
+                                        <td class="align-middle">@item.nameService</td>
+                                        <td class="align-middle">@item.transactionId</td>
+                                        <td class="align-middle text-center"><i class="fas fa-check-circle text-4 text-success" data-toggle="tooltip" data-original-title="Your order is Successful"></i></td>
+                                        <td class="align-middle text-right">@item.Product.price $</td>
+                                        <td class="align-middle text-center"><a href="#" data-toggle="tooltip" data-original-title="Repeat Order"><i class="fas fa-redo-alt"></i></a></td>
+                                    </tr>
+                               }
+                                
                             </tbody>
                         </table>
                     </div>

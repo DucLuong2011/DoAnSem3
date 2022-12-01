@@ -71,6 +71,7 @@ namespace DoAnSem3.Controllers
                 cus = _context.customers.Where(c => c.phone.Equals(phone)).FirstOrDefault();
                 values = _context.products.Where(c => c.svId.Equals(4))
                                           .Where(c => c.nspId.Equals(cus.phoneNsp)).ToList();
+                ViewBag.Phone = phone;
             }
 
             //if (price != 0)
@@ -81,6 +82,7 @@ namespace DoAnSem3.Controllers
 
             ViewBag.Customer = cus;
             ViewBag.Values = values;
+            
             return View();
         }
 

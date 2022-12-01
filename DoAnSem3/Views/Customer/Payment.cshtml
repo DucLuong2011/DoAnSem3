@@ -40,7 +40,7 @@
             <div class="p-4">
                 <div class="row">
                     <div class="col-lg-8">
-                        <form id="dthRechargeBill" asp-controller="Customer" asp-action="Orders" method="post">
+                        <form id="dthRechargeBill" asp-controller="Customer" asp-action="Update_Orders" method="post">
                             <input type="hidden" name="transactionId" value="@ViewBag.Num" />
                             <input type="hidden" name="productId" value="@ViewBag.Payment.ProductId" />
                             <input type="text" name="cusId" value="@HttpContextAccessor.HttpContext.Session.GetInt32("LoginCustomerId")" />
