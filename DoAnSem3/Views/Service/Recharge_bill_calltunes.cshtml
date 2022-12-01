@@ -39,7 +39,7 @@
                         <h2 class="text-4 mb-3">Call Tuners</h2>
                         <form id="dthRechargeBill" asp-controller="Customer" asp-action="Payment" method="post">
                             <input type="hidden" name="check" value="0" />
-                            <input type="hidden" id="svId" />
+                            <input type="hidden" name="cusId" value="@HttpContextAccessor.HttpContext.Session.GetInt32("LoginCustomerId")" />
                             <div class="form-group">
                                 <input type="text" class="form-control" data-bv-field="number" id="productId" name="id" required placeholder="Enter Song Code">
                             </div>

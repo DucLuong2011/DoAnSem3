@@ -15,7 +15,7 @@ namespace DoAnSem3.Models
         public string numberPhone { get; set; }
         public string nameCustomer { get; set; }
         public string nameService { get; set; }
-        public string description { get; set; }
+        public int transactionId { get; set; }
 
         [DisplayName("Order date")]
         public DateTime createAt { get; set; } = DateTime.Now;
@@ -26,5 +26,10 @@ namespace DoAnSem3.Models
         public int productId { get; set; }
 
         public Product Product { get; set; }
+
+        [ForeignKey("Customer")]
+        public int customerId { get; set; }
+
+        public Customer Customer { get; set; }
     }
 }

@@ -42,6 +42,7 @@
                     <div class="col-lg-8">
                         <form id="dthRechargeBill" asp-controller="Customer" asp-action="Orders" method="post">
                             <input type="hidden" name="transactionId" value="@ViewBag.Num" />
+                            <input type="hidden" name="productId" value="@ViewBag.Payment.ProductId" />
                             <input type="text" name="cusId" value="@HttpContextAccessor.HttpContext.Session.GetInt32("LoginCustomerId")" />
                             <div class="bg-light shadow-md rounded p-4">
                                 <h2 class="text-6">Bill Information</h2>
@@ -51,18 +52,36 @@
                                     <p class=" ml-3 " >
                                         @ViewBag.Payment.Name
                                     </p> 
-                                    <p class=" ml-3 " >
-                                        @ViewBag.Payment.nspName
-                                    </p>
+                                </div>
+
+                                <div class="featured-box style-1">
+                                    <h3>Telephone</h3>
+                                    <input type="hidden"  name="nspName" value="@ViewBag.Payment.nspName" />
+                                    <p class=" ml-3">@ViewBag.Payment.nspName</p>
+                                 
+                                </div>
+                                <div class="featured-box style-1">
+                                    <h3>Telephone</h3>
+                                    <input type="hidden"  name="PhoneNumber" value="@ViewBag.PhoneNumber" />
+                                    <p class=" ml-3">@ViewBag.PhoneNumber</p>
+                                 
+                                </div>
+                                
+                                <div class="featured-box style-1">
+                                    <h3>Telephone</h3>
+                                    <input type="hidden"  name="svName" value="@ViewBag.Payment.svName" />
                                     <p class=" ml-3 " >
                                         @ViewBag.Payment.svName
                                     </p>
                                 </div>
+
                                 <div class="featured-box style-1">
                                     <h3>Telephone</h3>
-                                    <input type="hidden"  name="Phone" value="@ViewBag.PhoneNumber" />
-                                    <p class=" ml-3">@ViewBag.PhoneNumber</p>
+                                    <input type="hidden"  name="NameCustomer" value="@ViewBag.Payment.NameCustomer" />
+                                    <p class=" ml-3">@ViewBag.Payment.NameCustomer</p>
+                                 
                                 </div>
+
                                 <div class="featured-box style-1">
                                     <h3>Description</h3>
                                     <input type="hidden"  name="description" value="@ViewBag.Payment.Description" />

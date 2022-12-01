@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoAnSem3.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221129024337_v1")]
+    [Migration("20221130180028_v1")]
     partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,7 +87,7 @@ namespace DoAnSem3.Migrations
                     b.Property<string>("phone")
                         .IsRequired();
 
-                    b.Property<string>("phoneNsp");
+                    b.Property<int>("phoneNsp");
 
                     b.Property<int>("role");
 
@@ -151,9 +151,7 @@ namespace DoAnSem3.Migrations
 
                     b.Property<DateTime>("createAt");
 
-                    b.Property<int?>("customerId");
-
-                    b.Property<string>("description");
+                    b.Property<int>("customerId");
 
                     b.Property<string>("nameCustomer");
 
@@ -164,6 +162,8 @@ namespace DoAnSem3.Migrations
                     b.Property<int>("productId");
 
                     b.Property<bool>("status");
+
+                    b.Property<int>("transactionId");
 
                     b.HasKey("orderId");
 
@@ -231,9 +231,10 @@ namespace DoAnSem3.Migrations
 
             modelBuilder.Entity("DoAnSem3.Models.Order", b =>
                 {
-                    b.HasOne("DoAnSem3.Models.Customer")
+                    b.HasOne("DoAnSem3.Models.Customer", "Customer")
                         .WithMany("Orders")
-                        .HasForeignKey("customerId");
+                        .HasForeignKey("customerId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("DoAnSem3.Models.Product", "Product")
                         .WithMany()

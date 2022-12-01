@@ -28,7 +28,7 @@ namespace DoAnSem3.Models
         [Required(ErrorMessage = "Phone number can not be left blank")]
         public string phone { get; set; }
 
-        public string phoneNsp { get; set; }
+        public int phoneNsp { get; set; }
 
         public string password { get; set; }
 
